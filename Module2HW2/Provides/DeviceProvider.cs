@@ -9,7 +9,7 @@ namespace Module2HW2.Provides
         public Device GetDevice(int id_device)
         {
             Device device = null;
-            Device[] listDevice = GetAllDevices();
+            var listDevice = GetAllDevices();
 
             for (var i = 0; i < listDevice.Length; i++)
             {
@@ -26,7 +26,7 @@ namespace Module2HW2.Provides
 
         public Device[] GetAllDevices()
         {
-            Device[] listDevice = new Device[8];
+            var listDevice = new Device[8];
 
             listDevice[0] = new Device { Id = 1, Name = "Apple", Model = "12", Currency = Currency.USD, Price = 2000 };
             listDevice[1] = new Device { Id = 2, Name = "OnePlus", Model = "9D", Currency = Currency.USD, Price = 700 };
