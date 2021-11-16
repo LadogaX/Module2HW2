@@ -1,4 +1,5 @@
 ﻿using Module2HW2.Configs;
+using Module2HW2.Models;
 
 namespace Module2HW2.Services
 {
@@ -7,11 +8,10 @@ namespace Module2HW2.Services
         public ConfigService()
         {
             Config = new Config();
-            Init();
         }
 
         public Config Config { get; set; }
-        public CoefficientConfig GetCoefficientConfig()
+        public DataCoefficientConfig GetCoefficientConfig()
         {
             return Config.CoefficientConfig;
         }
@@ -21,16 +21,21 @@ namespace Module2HW2.Services
             return Config.CartConfig;
         }
 
-        private void Init()
+        public CurrencyCoefficient GetCoefficient()
         {
-            Config.CartConfig = new CartConfig();
+            return Config.CoefficientConfig.GetCoefficient(Currency.UAH);
+        }
+
+        public void Init(Currency currency)
+        {
             Config.CartConfig.Capacity = 10;
             Config.IncrenentCapacityOrder = 2;
-            Config.Currency = Models.Currency.UA;
+            Config.Currency = currency;
 
-            Config.CoefficientConfig = new CoefficientConfig(Config.Currency);
-            Config.CoefficientConfig.RU = 81f;
-            Config.CoefficientConfig.UA = 35f;
+            Config.CoefficientConfig.AddCoefficient(new CurrencyCoefficient { Currency = Currency.EUR, Value = 1.2f });
+            Config.CoefficientConfig.AddCoefficient(new CurrencyCoefficient { Currency = Currency.RUB, Value = 80f });
+            Config.CoefficientConfig.AddCoefficient(new CurrencyCoefficient { Currency = Currency.UAH, Value = 29.5f });
+            Config.CoefficientConfig.AddCoefficient(new CurrencyCoefficient { Currency = Currency.USD, Value = 1f });
         }
     }
 }

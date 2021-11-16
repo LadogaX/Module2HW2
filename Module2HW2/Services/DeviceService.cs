@@ -8,11 +8,11 @@ namespace Module2HW2.Services
    public class DeviceService
     {
         private DeviceProvider _deviceProvider;
-        private CoefficientConfig _coefficientConfig;
-        public DeviceService(CoefficientConfig coefficientConfig)
+        private ConfigService _configService;
+        public DeviceService(ConfigService configService)
         {
             _deviceProvider = new DeviceProvider(DataBase.Instance);
-            _coefficientConfig = coefficientConfig;
+            _configService = configService;
         }
 
         public Device[] ListDevice { get; set; }
@@ -20,30 +20,23 @@ namespace Module2HW2.Services
         public Device[] GetAllDevices()
         {
             ListDevice = _deviceProvider.GetAllDevices();
-            double coefficient = _coefficientConfig.GetCoefficient();
+            CurrencyCoefficient coefficient = _configService.GetCoefficient();
             for (var i = 0; i < ListDevice.Length; i++)
             {
-                ListDevice[i].Currency = _coefficientConfig.Currency;
-                ListDevice[i].Price *= coefficient;
+                ListDevice[i].Currency = coefficient.Currency;
+                ListDevice[i].Price *= coefficient.Value;
             }
 
             return ListDevice;
         }
 
-        public void DisplayLoadedDevices()
-        {
-            Console.WriteLine("LIST EXIST DEVICES:");
-            DisplayDevices(ListDevice);
-        }
-
         public void DisplayDevices(Device[] devices)
         {
-            Console.WriteLine($" ID          Name             Price  Currency");
             for (var i = 0; i < devices.Length; i++)
             {
                 if (devices[i] != null)
                 {
-                    Console.WriteLine($"{devices[i].Id,-4} : {devices[i].Name,-20} {devices[i].Price:f2} {devices[i].Currency,5}");
+                  Console.WriteLine($"ID: {devices[i].Id,-4} Name: {devices[i].Name,-20} Price: {devices[i].Price,12:F2} {devices[i].Currency,-3}");
                 }
             }
 

@@ -2,14 +2,16 @@
 {
     public class User
     {
-        public User()
-        {
-        }
+        public string Name { get; set; }
 
-        public string Name { get; init; }
+        public string Email { get; set; }
 
-        public string Email { get; init; }
+        public string Phone { get; set; }
 
-        public string Phone { get; init; }
+        public bool SendSms { get; set; }
+
+        public bool SendEMail { get; set; }
+
+        public Currency Currency { get; set; }
     }
 }

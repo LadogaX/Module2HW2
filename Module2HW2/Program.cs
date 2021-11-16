@@ -4,7 +4,7 @@
     {
         public static void Main()
         {
-            Starter starter = new Starter();
+            var starter = new Starter();
             starter.Run();
         }
     }

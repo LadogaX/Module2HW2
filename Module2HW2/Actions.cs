@@ -11,10 +11,9 @@ namespace Module2HW2
         private CartServices _cartService;
         private OrderService _orderService;
 
-        // private Device[] _catalogDevices;
         public Actions(User user, ConfigService configService)
         {
-            _deviceService = new DeviceService(configService.GetCoefficientConfig());
+            _deviceService = new DeviceService(configService);
             _cartService = new CartServices(Cart.Instance, _deviceService, configService.GetCartConfig());
             _orderService = new OrderService(user, _cartService);
         }
@@ -22,7 +21,8 @@ namespace Module2HW2
         public void GetListDevices()
         {
             _deviceService.GetAllDevices();
-            _deviceService.DisplayLoadedDevices();
+            Console.WriteLine("LIST EXIST DEVICES:");
+            _deviceService.DisplayDevices(_deviceService.ListDevice);
         }
 
         public void AddIntoCart(int id_device)

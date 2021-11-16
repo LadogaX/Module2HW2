@@ -2,8 +2,9 @@
 {
     public enum Currency
     {
-        UA,
-        RU,
-        US
+        UAH = 980,
+        RUB = 643,
+        USD = 840,
+        EUR = 978
     }
 }

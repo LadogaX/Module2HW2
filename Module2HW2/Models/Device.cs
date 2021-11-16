@@ -1,6 +1,4 @@
-﻿using Module2HW2.Models;
-
-namespace Module2HW2.Models
+﻿namespace Module2HW2.Models
 {
     public class Device
     {

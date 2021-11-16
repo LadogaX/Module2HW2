@@ -5,23 +5,27 @@ using Module2HW2.Provides;
 
 namespace Module2HW2.Services
 {
-   public class CartServices
+    public class CartServices
     {
         private Cart _cart;
         private DeviceService _deviceService;
+        private Device[] _cartContens;
         public CartServices(Cart cart, DeviceService deviceService, CartConfig config)
         {
             _cart = cart;
-            _cart.SetCapacity(config.Capacity);
+            _cartContens = _cart.Devices;
+            SetCapacity(config.Capacity);
             _deviceService = deviceService;
         }
 
+        public int CountDevice { get; private set; }
+        public int Capacity { get; private set; }
         public void Add(int id_device)
         {
             Device device = GetDevice(id_device);
             if (device != null)
             {
-                _cart.Add(device);
+                Add(device);
             }
             else
             {
@@ -29,34 +33,64 @@ namespace Module2HW2.Services
             }
         }
 
-        public void Clear()
+        public void Add(Device device)
         {
-            _cart.Clear();
+            for (var i = CountDevice; i < _cartContens.Length; i++)
+            {
+                if (_cartContens[i] == null)
+                {
+                    _cartContens[i] = device;
+                    CountDevice++;
+                    break;
+                }
+                else
+                {
+                    SetCapacity(10);
+                }
+            }
         }
 
         public void DisplayCart()
         {
-            _deviceService.DisplayDevices(_cart.GetCartContens());
+            _deviceService.DisplayDevices(GetCartContens());
+        }
+
+        public void SetCapacity(int capacityCart)
+        {
+            Capacity = capacityCart;
+            Array.Resize(ref _cartContens, capacityCart);
+        }
+
+        public void Clear()
+        {
+            Array.Clear(_cartContens, 0, _cartContens.Length - 1);
+        }
+
+        public Device[] GetCartContens()
+        {
+            return _cartContens;
         }
 
         public Device[] GetChoiceDevice()
         {
-            return _cart.GetChoiceDevice();
+            Device[] choiceDevices = new Device[CountDevice];
+            Array.Copy(_cartContens, choiceDevices, CountDevice);
+            return choiceDevices;
         }
 
         private Device GetDevice(int id_device)
         {
-            Device device = null;
-            foreach (Device d in _deviceService.ListDevice)
+            Device findingDevice = null;
+            foreach (Device device in _deviceService.ListDevice)
             {
-                if (d.Id == id_device)
+                if (device.Id == id_device)
                 {
-                    device = d;
+                    findingDevice = device;
                     break;
                 }
             }
 
-            return device;
+            return findingDevice;
         }
     }
 }

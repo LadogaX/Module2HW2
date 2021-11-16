@@ -11,7 +11,7 @@ namespace Module2HW2.Provides
             DataBase = dataBase;
         }
 
-        private DataBase DataBase { get; init; }
+        private DataBase DataBase { get; set; }
 
         public Device GetDevice(int id_device)
         {

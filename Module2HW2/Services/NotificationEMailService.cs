@@ -2,9 +2,9 @@
 
 namespace Module2HW2.Services
 {
-    internal class EMailNotificatiomService
+    public class NotificationEMailService
     {
-        internal static void Send(string email, string message)
+        public void Send(string email, string message)
         {
             Console.WriteLine($"EMail {email} notification {message}");
             Console.WriteLine();

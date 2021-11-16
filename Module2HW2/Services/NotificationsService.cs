@@ -14,14 +14,21 @@ namespace Module2HW2.Services
             _message = message;
         }
 
-        public void SendSms()
-        {
-            SMSNotificationService.Send(_user.Phone, _message);
-        }
+        public NotificationSmsService NotificationSmsService { get; set; }
 
-        public void SendEMail()
+        public NotificationEMailService NotificationEMailService { get; set; }
+
+        public void Notify()
         {
-            EMailNotificatiomService.Send(_user.Email, _message);
+            if (_user.SendSms)
+            {
+                NotificationSmsService.Send(_user.Phone, _message);
+            }
+
+            if (_user.SendEMail)
+            {
+                NotificationEMailService.Send(_user.Email, _message);
+            }
         }
     }
 }

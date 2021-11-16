@@ -14,8 +14,9 @@ namespace Module2HW2
 
         public Starter()
         {
+            _user = new User { Name = "Ar Tom", Phone = "+3800501234567", Email = "Ar.Tom@gmail.com", Currency = Currency.UAH, SendEMail = true, SendSms = true };
             _configService = new ConfigService();
-            _user = new User { Name = "Ar Tom", Phone = "+3800501234567", Email = "Ar.Tom@gmail.com" };
+            _configService.Init(_user.Currency);
             _action = new Actions(_user, _configService);
             _cart = Cart.Instance;
         }
@@ -31,8 +32,6 @@ namespace Module2HW2
             _action.DisplayCart();
 
             _action.Checkout();
-
-            Console.ReadLine();
         }
     }
 }
