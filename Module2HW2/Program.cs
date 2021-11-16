@@ -1,11 +1,11 @@
-﻿using System;
-
-namespace Module2HW2
+﻿namespace Module2HW2
 {
-   public class Program
+    public class Program
     {
-        public static void Main(string[] args)
+        public static void Main()
         {
+            var starter = new Starter();
+            starter.Run();
         }
     }
 }
