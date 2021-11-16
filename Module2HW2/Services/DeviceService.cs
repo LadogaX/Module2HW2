@@ -11,7 +11,7 @@ namespace Module2HW2.Services
         private ConfigService _configService;
         public DeviceService(ConfigService configService)
         {
-            _deviceProvider = new DeviceProvider(DataBase.Instance);
+            _deviceProvider = new DeviceProvider();
             _configService = configService;
         }
 

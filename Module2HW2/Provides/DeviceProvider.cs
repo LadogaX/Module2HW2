@@ -6,17 +6,10 @@ namespace Module2HW2.Provides
 {
     public class DeviceProvider
     {
-        public DeviceProvider(DataBase dataBase)
-        {
-            DataBase = dataBase;
-        }
-
-        private DataBase DataBase { get; set; }
-
         public Device GetDevice(int id_device)
         {
             Device device = null;
-            Device[] listDevice = DataBase.ListDevice;
+            Device[] listDevice = GetAllDevices();
 
             for (var i = 0; i < listDevice.Length; i++)
             {
@@ -33,7 +26,16 @@ namespace Module2HW2.Provides
 
         public Device[] GetAllDevices()
         {
-            Device[] listDevice = DataBase.Instance.ListDevice;
+            Device[] listDevice = new Device[8];
+
+            listDevice[0] = new Device { Id = 1, Name = "Apple", Model = "12", Currency = Currency.USD, Price = 2000 };
+            listDevice[1] = new Device { Id = 2, Name = "OnePlus", Model = "9D", Currency = Currency.USD, Price = 700 };
+            listDevice[2] = new Device { Id = 3, Name = "Oppo", Model = "7R", Currency = Currency.USD, Price = 650 };
+            listDevice[3] = new Device { Id = 4, Name = "Poco", Model = "15G", Currency = Currency.USD, Price = 500 };
+            listDevice[4] = new Device { Id = 5, Name = "Realme", Model = "8HH", Currency = Currency.USD, Price = 800 };
+            listDevice[5] = new Device { Id = 6, Name = "Samsung", Model = "A72", Currency = Currency.USD, Price = 750 };
+            listDevice[6] = new Device { Id = 7, Name = "Vivo", Model = "V7", Currency = Currency.USD, Price = 500 };
+            listDevice[7] = new Device { Id = 8, Name = "Xiaomi", Model = "5F", Currency = Currency.USD, Price = 675 };
 
             return listDevice;
         }
